@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+/* `dark:` utilities follow the site theme: an explicit choice (data-theme),
+   otherwise the visitor's device setting. */
+@custom-variant dark {
+  &:where([data-theme="dark"], [data-theme="dark"] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme="light"]), :root:not([data-theme="light"]) *) {
+      @slot;
+    }
+  }
+}
+
+/* Vaazi palette: warm sand and ink, with earthy accents drawn from
+   Maasai shuka red, ochre clay and beadwork blue. */
+:root {
+  --background: #f6f3ee;
+  --foreground: #171513;
+  --muted: #6f6a62;
+  --line: #e2dbcf;
+  --card: #fffdf9;
+  --soft: #ece6dc;
+  --accent: #b0632a; /* ochre */
+  --sale: #a3242a; /* shuka red */
+  --bead: #1f4e79; /* beadwork blue */
+  --earth: #2c241e;
+  /* Fixed tones that stay the same in both themes (text on photos/earth bands) */
+  --paper: #f6f3ee;
+  --ink: #171513;
+  color-scheme: light;
+}
+
+/* Dark theme: deep earth-brown night tones, same accents slightly lifted.
+   Applies when the visitor picks dark, or picks "system" and their device is dark. */
+:root[data-theme="dark"] {
+  --background: #12100e;
+  --foreground: #efe9df;
+  --muted: #a39a8d;
+  --line: #2f2a24;
+  --card: #1b1815;
+  --soft: #231f1b;
+  --accent: #d0844a;
+  --sale: #e0545a;
+  --bead: #5d8fc4;
+  --earth: #2a221c;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: #12100e;
+    --foreground: #efe9df;
+    --muted: #a39a8d;
+    --line: #2f2a24;
+    --card: #1b1815;
+    --soft: #231f1b;
+    --accent: #d0844a;
+    --sale: #e0545a;
+    --bead: #5d8fc4;
+    --earth: #2a221c;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-card: var(--card);
+  --color-soft: var(--soft);
+  --color-accent: var(--accent);
+  --color-sale: var(--sale);
+  --color-bead: var(--bead);
+  --color-earth: var(--earth);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-display);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Shared component styles as Tailwind utilities. */
+
+/* Editorial serif headline */
+@utility display {
+  @apply font-display font-normal leading-[1.02] tracking-[-0.01em];
+}
+/* Small spaced-out uppercase label */
+@utility eyebrow {
+  @apply text-[11px] font-medium uppercase tracking-[0.3em] text-muted;
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 bg-foreground px-8 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-background transition hover:bg-foreground/85 disabled:cursor-not-allowed disabled:bg-foreground/30;
+}
+@utility btn-light {
+  @apply inline-flex items-center justify-center gap-2 bg-paper px-8 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-ink transition hover:bg-white;
+}
+@utility btn-outline {
+  @apply inline-flex items-center justify-center gap-2 border border-foreground px-8 py-4 text-[11px] font-medium uppercase tracking-[0.2em] transition hover:bg-foreground hover:text-background;
+}
+@utility btn-whatsapp {
+  @apply inline-flex items-center justify-center gap-2 bg-[#25D366] px-8 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-white transition hover:bg-[#1fb457];
+}
+@utility input {
+  @apply w-full border border-line bg-card px-3 py-3 text-sm outline-none transition focus:border-foreground;
+}
+@utility label {
+  @apply mb-1.5 block text-[11px] font-medium uppercase tracking-[0.2em] text-muted;
+}
+
+/* Announcement bar ticker */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee {
+  animation: marquee 40s linear infinite;
+}
+
+/* Slow fade for hero slides */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.fade-in {
+  animation: fade-in 0.9s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee, .fade-in { animation: none; }
+}
+
+/* Horizontal product rails */
+.rail {
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+}
+.rail::-webkit-scrollbar { display: none; }
+.rail > * { scroll-snap-align: start; }

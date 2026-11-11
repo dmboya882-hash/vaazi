@@ -1,0 +1,29 @@
+{
+  // Run with: Ctrl+Shift+P → "Tasks: Run Task" → "Start Vaazi"
+  // Then open http://localhost:3000 (shop) or http://localhost:3000/admin (admin)
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Convex backend",
+      "type": "shell",
+      "command": "npx convex dev",
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "group": "vaazi", "panel": "dedicated" }
+    },
+    {
+      "label": "Website",
+      "type": "shell",
+      "command": "npm run dev",
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "group": "vaazi", "panel": "dedicated" }
+    },
+    {
+      "label": "Start Vaazi",
+      "dependsOn": ["Convex backend", "Website"],
+      "dependsOrder": "parallel",
+      "problemMatcher": []
+    }
+  ]
+}
