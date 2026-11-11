@@ -126,3 +126,45 @@ export const filterOptions = query({
     return { sizes: [...new Set(variants.filter((v) => v.stock > 0).map((v) => v.size))] };
   },
 });
+
+// Most-bought products: ranked by units sold across orders that went through
+// (pay on delivery, paid, shipped, delivered). Gaps are filled with regular
+// stock marked as featured, then the newest, so the row is never empty.
+export const bestsellers = query({
+  args: { limit: v.optional(v.number()) },
+  handler: async (ctx, { limit = 4 }) => {
+    const sold = new Map<string, number>();
+    for (const status of ["CONFIRMED", "PAID", "SHIPPED", "DELIVERED"] as const) {
+      const orders = await ctx.db
+        .query("orders")
+        .withIndex("by_status", (q) => q.eq("status", status))
+        .collect();
+      for (const o of orders) {
+        for (const item of o.items) {
+          if (item.productId) sold.set(item.productId, (sold.get(item.productId) ?? 0) + item.quantity);
+        }
+      }
+    }
+
+    const active = await ctx.db
+      .query("products")
+      .withIndex("by_active", (q) => q.eq("active", true))
+      .collect();
+    // Thrifted one-offs can't be "frequently bought", so regular stock comes
+    // first; sold-out items are skipped.
+    const ranked = [...active].sort(
+      (a, b) =>
+        (sold.get(b._id) ?? 0) - (sold.get(a._id) ?? 0) ||
+        Number(!!a.condition) - Number(!!b.condition) ||
+        Number(b.featured) - Number(a.featured) ||
+        b._creationTime - a._creationTime,
+    );
+    const picked = [];
+    for (const p of ranked) {
+      if (picked.length >= limit) break;
+      const full = await hydrate(ctx, p);
+      if (full.variants.some((v) => v.stock > 0)) picked.push({ ...full, unitsSold: sold.get(p._id) ?? 0 });
+    }
+    return picked;
+  },
+});

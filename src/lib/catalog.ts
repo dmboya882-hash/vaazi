@@ -30,6 +30,7 @@ export const getProducts = (f: CatalogFilters = {}) =>
   );
 
 export const getFeaturedProducts = () => query(() => fetchQuery(api.catalog.featured, {}));
+export const getBestsellers = (limit = 4) => query(() => fetchQuery(api.catalog.bestsellers, { limit }));
 export const getNewestProducts = (limit = 10) => query(() => fetchQuery(api.catalog.newest, { limit }));
 export const getProductBySlug = (slug: string) => query(() => fetchQuery(api.catalog.bySlug, { slug }));
 export const getRelatedProducts = (productId: ProductWithCard["_id"]) =>

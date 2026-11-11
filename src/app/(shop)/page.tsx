@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import { getCategories, getFeaturedProducts } from "@/lib/catalog";
+import { getBestsellers, getCategories } from "@/lib/catalog";
 import { ProductCard, ProductGridSkeleton } from "@/components/product-card";
 import { EditorialPhoto } from "@/components/editorial-photo";
 import { DropCountdown } from "@/components/drop-countdown";
@@ -11,8 +11,9 @@ import { formatMoney, site } from "@/lib/site";
 // A deliberately quiet home page: one hero, one story, a short edit of four
 // pieces, the thrift drop, and plain category links. No product walls.
 
-async function TheEdit() {
-  const products = (await getFeaturedProducts()).slice(0, 4);
+// Featured products = what customers buy most (see catalog.bestsellers)
+async function FeaturedProducts() {
+  const products = await getBestsellers(4);
   return (
     <div className="grid grid-cols-2 gap-x-4 gap-y-12 lg:grid-cols-4">
       {products.map((p) => (
@@ -94,24 +95,8 @@ export default function HomePage() {
         </ul>
       </section>
 
-      {/* The edit: four pieces only */}
-      <section className="mx-auto mt-16 max-w-[1440px] px-4 sm:px-8">
-        <div className="mb-10 flex items-end justify-between gap-4">
-          <div>
-            <p className="eyebrow">Curated</p>
-            <h2 className="display mt-3 text-4xl sm:text-5xl">The Edit</h2>
-          </div>
-          <Link href="/shop" className="eyebrow text-foreground underline underline-offset-8">
-            Shop all
-          </Link>
-        </div>
-        <Suspense fallback={<ProductGridSkeleton count={4} />}>
-          <TheEdit />
-        </Suspense>
-      </section>
-
       {/* Weekly thrift drop */}
-      <section className="mt-28 bg-earth text-paper">
+      <section className="mt-10 bg-earth text-paper">
         <BeadBand />
         <div className="mx-auto grid max-w-[1440px] gap-12 px-4 py-20 sm:px-8 md:grid-cols-2 md:items-center">
           <EditorialPhoto photo={media.thrift} className="aspect-[4/5] w-full bg-white/5 md:order-2" />
@@ -141,6 +126,22 @@ export default function HomePage() {
           </div>
         </div>
         <BeadBand />
+      </section>
+
+      {/* Featured products: the most-bought pieces */}
+      <section className="mx-auto mt-24 max-w-[1440px] px-4 sm:px-8">
+        <div className="mb-10 flex items-end justify-between gap-4">
+          <div>
+            <p className="eyebrow">Most loved · Frequently bought</p>
+            <h2 className="display mt-3 text-4xl sm:text-5xl">Featured Products</h2>
+          </div>
+          <Link href="/shop" className="eyebrow text-foreground underline underline-offset-8">
+            Shop all
+          </Link>
+        </div>
+        <Suspense fallback={<ProductGridSkeleton count={4} />}>
+          <FeaturedProducts />
+        </Suspense>
       </section>
 
       {/* Category index */}
