@@ -106,6 +106,34 @@ src/components/    UI pieces (header, product card, bag drawer, …)
 src/lib/           Settings, Convex helpers, Paystack, admin auth
 ```
 
+## Deploying
+
+- **Website:** Vercel, building from GitHub (`npm run build`).
+- **Backend:** Convex production deployment `scintillating-okapi-816` (team denis-mboya, project vaazi, EU region).
+
+Deploy backend changes (anything in `convex/`) from your computer:
+
+```bash
+npx convex deploy
+```
+
+The first time only, load the sample catalog into production (this wipes products and orders):
+
+```bash
+npx convex run seed:run --prod
+```
+
+Vercel environment variables (Production):
+
+| Name | Value |
+|---|---|
+| `NEXT_PUBLIC_CONVEX_URL` | `https://scintillating-okapi-816.eu-west-1.convex.cloud` |
+| `CONVEX_SERVER_SECRET` | same value as set with `npx convex env set CONVEX_SERVER_SECRET … --prod` |
+| `ADMIN_PASSWORD` | your admin password |
+| `SESSION_SECRET` | a long random string |
+| `PAYSTACK_SECRET_KEY` | your Paystack key (leave empty for demo mode) |
+| `NEXT_PUBLIC_SITE_URL` | your Vercel URL, e.g. `https://vaazi.vercel.app` |
+
 ## Before going live
 
 - Set a strong `ADMIN_PASSWORD` and `SESSION_SECRET`.
