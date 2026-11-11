@@ -7,13 +7,12 @@ export const THEME_KEY = "vaazi-theme";
 // Runs in <head> before the page paints, so a saved choice never flashes.
 export const themeScript = `try{var t=localStorage.getItem("${THEME_KEY}");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
 
+// Light is the default for everyone; dark only when the visitor turns it on.
 function currentTheme(): "light" | "dark" {
-  const set = document.documentElement.dataset.theme;
-  if (set === "light" || set === "dark") return set;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 }
 
-// Light/dark switch. Until the visitor chooses, the site follows their device.
+// Light/dark switch. The choice is remembered on this device.
 export function ThemeToggle({ className = "", showLabel = false }: { className?: string; showLabel?: boolean }) {
   const [theme, setTheme] = useState<"light" | "dark" | null>(null);
 

@@ -1,17 +1,7 @@
 @import "tailwindcss";
 
-/* `dark:` utilities follow the site theme: an explicit choice (data-theme),
-   otherwise the visitor's device setting. */
-@custom-variant dark {
-  &:where([data-theme="dark"], [data-theme="dark"] *) {
-    @slot;
-  }
-  @media (prefers-color-scheme: dark) {
-    &:where(:root:not([data-theme="light"]), :root:not([data-theme="light"]) *) {
-      @slot;
-    }
-  }
-}
+/* `dark:` utilities apply only when the visitor switches to dark mode. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /* Vaazi palette: warm sand and ink, with earthy accents drawn from
    Maasai shuka red, ochre clay and beadwork blue. */
@@ -33,7 +23,7 @@
 }
 
 /* Dark theme: deep earth-brown night tones, same accents slightly lifted.
-   Applies when the visitor picks dark, or picks "system" and their device is dark. */
+   Light is the default; dark applies only when the visitor turns it on. */
 :root[data-theme="dark"] {
   --background: #12100e;
   --foreground: #efe9df;
@@ -46,21 +36,6 @@
   --bead: #5d8fc4;
   --earth: #2a221c;
   color-scheme: dark;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --background: #12100e;
-    --foreground: #efe9df;
-    --muted: #a39a8d;
-    --line: #2f2a24;
-    --card: #1b1815;
-    --soft: #231f1b;
-    --accent: #d0844a;
-    --sale: #e0545a;
-    --bead: #5d8fc4;
-    --earth: #2a221c;
-    color-scheme: dark;
-  }
 }
 
 @theme inline {
