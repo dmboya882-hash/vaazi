@@ -20,18 +20,6 @@ export const media = {
     alt: "Man in a black coat standing in tall dry grass",
     credit: "Kofi Shelby / Pexels",
   } as Photo,
-  editorial: {
-    main: {
-      src: unsplash("1792058577815-7a605d141a6d", 1400),
-      alt: "Man in a long black robe standing barefoot on desert dunes",
-      credit: "Emmanuel Black / Unsplash",
-    } as Photo,
-    row: [
-      { src: pexels(5839957, 1200), alt: "Young man in profile against eroded earth cliffs", credit: "cottonbro studio / Pexels" },
-      { src: pexels(35564246, 1200), alt: "Two men in tailored suits standing in tall grass", credit: "LekePOV / Pexels" },
-      { src: pexels(30643295, 1200), alt: "Man in a black coat among tall dry grass", credit: "Kofi Shelby / Pexels" },
-    ] as Photo[],
-  },
   thrift: {
     src: unsplash("1579921562939-d9cc7a7dbd8e", 1400),
     alt: "Man in a long brown overcoat against dry brush",

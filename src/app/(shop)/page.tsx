@@ -50,8 +50,6 @@ const FAQ = [
 ] as const;
 
 export default function HomePage() {
-  const { editorial } = media;
-
   return (
     <>
       {/* Hero: one full-screen landscape photo with the name across it */}
@@ -96,45 +94,8 @@ export default function HomePage() {
         </ul>
       </section>
 
-      {/* Intro */}
-      <section className="mx-auto mt-12 max-w-2xl px-4 text-center sm:px-8">
-        <p className="font-display text-2xl leading-snug sm:text-3xl">
-          Named for <em>mavazi</em>, the Swahili word for clothing. Timeless pieces and one-of-one finds, curated in
-          Nairobi for the way you live.
-        </p>
-      </section>
-
-      {/* Editorial story */}
-      <section className="mx-auto mt-24 max-w-[1440px] px-4 sm:px-8">
-        <div className="grid gap-8 md:grid-cols-[1fr_1fr] md:items-end">
-          <div className="md:pb-10">
-            <p className="eyebrow">Campaign · Ardhi</p>
-            <h2 className="display mt-4 text-5xl sm:text-7xl">
-              Ardhi na jiji.
-              <br />
-              <em>The land and the city.</em>
-            </h2>
-            <p className="mt-6 max-w-md text-[15px] leading-relaxed text-muted">
-              Dark tailoring, earth tones and honest fabrics, shaped by open country and worn in town. Easy layers for
-              Nairobi&apos;s cool mornings and warm afternoons.
-            </p>
-            <Link href="/shop?sort=newest" className="btn-outline mt-8">
-              View all
-            </Link>
-          </div>
-          <EditorialPhoto photo={editorial.main} className="aspect-[4/5] w-full" />
-        </div>
-        {editorial.row.length > 0 && (
-          <div className="mt-4 grid grid-cols-3 gap-4">
-            {editorial.row.map((p, i) => (
-              <EditorialPhoto key={i} photo={p} className="aspect-[4/3] w-full object-[center_25%]" />
-            ))}
-          </div>
-        )}
-      </section>
-
       {/* The edit: four pieces only */}
-      <section className="mx-auto mt-28 max-w-[1440px] px-4 sm:px-8">
+      <section className="mx-auto mt-16 max-w-[1440px] px-4 sm:px-8">
         <div className="mb-10 flex items-end justify-between gap-4">
           <div>
             <p className="eyebrow">Curated</p>
