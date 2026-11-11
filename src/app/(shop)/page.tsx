@@ -5,6 +5,7 @@ import { ProductCard, ProductGridSkeleton } from "@/components/product-card";
 import { EditorialPhoto } from "@/components/editorial-photo";
 import { DropCountdown } from "@/components/drop-countdown";
 import { BeadBand } from "@/components/bead-band";
+import { PromoVideo } from "@/components/promo-video";
 import { BeadCollar, BeadLabel, BeadRow, ShukaStripe } from "@/components/tribal";
 import { media } from "@/lib/media";
 import { formatMoney, site } from "@/lib/site";
@@ -146,6 +147,32 @@ export default function HomePage() {
         <Suspense fallback={<ProductGridSkeleton count={4} />}>
           <FeaturedProducts />
         </Suspense>
+      </section>
+
+      {/* The film: the 15s promo reel (rendered from the vaazi-promo project) */}
+      <section className="mx-auto mt-28 grid max-w-[1440px] items-center gap-10 px-4 sm:px-8 md:grid-cols-[1fr_auto] lg:gap-20">
+        <div className="max-w-xl">
+          <BeadLabel>On film</BeadLabel>
+          <h2 className="display mt-3 text-4xl sm:text-6xl">
+            Vaazi, in <em>fifteen seconds</em>
+          </h2>
+          <p className="mt-5 text-[15px] leading-relaxed text-muted lg:text-base">
+            New pieces, one-of-one thrift finds every {site.thriftDrop.label.replace(/s at/, " at")}, M-Pesa or card at checkout,
+            and delivery to all 47 counties.
+          </p>
+          <BeadRow className="mt-6" />
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link href="/shop?sort=newest" className="btn">
+              Shop new in
+            </Link>
+            <Link href="/shop?thrifted=1" className="btn-outline">
+              Shop thrifted
+            </Link>
+          </div>
+        </div>
+        <div className="mx-auto w-full max-w-[340px] md:w-[340px] lg:max-w-[380px] lg:w-[380px]">
+          <PromoVideo src="/media/vaazi-reel.mp4" poster="/media/vaazi-reel-poster.jpg" label="VAAZI promo film" />
+        </div>
       </section>
 
       {/* Category index */}
