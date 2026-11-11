@@ -5,6 +5,7 @@ import { Header } from "@/components/header";
 import { Newsletter } from "@/components/newsletter";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { BeadBand } from "@/components/bead-band";
+import { BeadRow } from "@/components/tribal";
 import { formatMoney, site } from "@/lib/site";
 
 const FOOTER = [
@@ -43,6 +44,7 @@ export default function ShopLayout({ children }: { children: React.ReactNode }) 
             <div>
               <p className="eyebrow text-white/50">Jiunge · Join the list</p>
               <h2 className="display mt-3 text-5xl">10% off your first order</h2>
+              <BeadRow count={10} small className="mt-4" />
               <p className="mt-3 max-w-sm text-white/70">
                 Join the list for early access to drops, restocks and members-only offers.
               </p>

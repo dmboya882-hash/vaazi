@@ -123,7 +123,15 @@ export function HeaderBar({ categories }: { categories: Cat[] }) {
         {/* Centre: the wordmark */}
         <Link href="/" aria-label={`${site.name} home`} className="text-center leading-none">
           <span className="display block pl-[0.4em] text-[34px] font-medium tracking-[0.4em] sm:text-[44px]">{site.name}</span>
-          <span className="mt-1 hidden text-[9px] uppercase tracking-[0.45em] text-muted sm:block">Mavazi · Nairobi</span>
+          <span className="mt-1 hidden items-center justify-center gap-2 text-[9px] uppercase tracking-[0.45em] text-muted sm:flex">
+            Mavazi
+            <span aria-hidden className="flex gap-[3px]">
+              <i className="block h-[5px] w-[5px] rotate-45 bg-sale" />
+              <i className="block h-[5px] w-[5px] rotate-45 bg-accent" />
+              <i className="block h-[5px] w-[5px] rotate-45 bg-bead" />
+            </span>
+            Nairobi
+          </span>
         </Link>
 
         {/* Right: actions */}

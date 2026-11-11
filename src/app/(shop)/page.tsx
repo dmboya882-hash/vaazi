@@ -5,7 +5,7 @@ import { ProductCard, ProductGridSkeleton } from "@/components/product-card";
 import { EditorialPhoto } from "@/components/editorial-photo";
 import { DropCountdown } from "@/components/drop-countdown";
 import { BeadBand } from "@/components/bead-band";
-import { BeadCollar, BeadRow, ShukaStripe } from "@/components/tribal";
+import { BeadCollar, BeadLabel, BeadRow, ShukaStripe } from "@/components/tribal";
 import { media } from "@/lib/media";
 import { formatMoney, site } from "@/lib/site";
 
@@ -136,7 +136,7 @@ export default function HomePage() {
       <section className="mx-auto mt-24 max-w-[1440px] px-4 sm:px-8">
         <div className="mb-10 flex items-end justify-between gap-4">
           <div>
-            <p className="eyebrow">Frequently bought</p>
+            <BeadLabel>Frequently bought</BeadLabel>
             <h2 className="display mt-3 text-4xl sm:text-5xl">Featured Products</h2>
           </div>
           <Link href="/shop" className="eyebrow text-foreground underline underline-offset-8">
@@ -150,7 +150,7 @@ export default function HomePage() {
 
       {/* Category index */}
       <section className="mx-auto mt-28 max-w-[1440px] px-4 sm:px-8">
-        <p className="eyebrow mb-6">Shop by category</p>
+        <BeadLabel className="mb-6">Shop by category</BeadLabel>
         <Suspense fallback={<div className="h-80 animate-pulse bg-soft" />}>
           <CategoryIndex />
         </Suspense>
@@ -159,7 +159,7 @@ export default function HomePage() {
       {/* FAQ */}
       <section className="mx-auto mt-28 grid max-w-[1440px] gap-10 px-4 sm:px-8 lg:grid-cols-[1fr_2fr]">
         <div>
-          <p className="eyebrow">Maswali</p>
+          <BeadLabel>Maswali</BeadLabel>
           <h2 className="display mt-3 text-5xl">Questions?</h2>
           <p className="mt-4 text-muted">We reply fast on WhatsApp, 8am – 7pm.</p>
           <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer" className="btn-whatsapp mt-6">

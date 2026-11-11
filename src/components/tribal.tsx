@@ -36,13 +36,13 @@ export function BeadCollar({ size = 120, className = "" }: { size?: number; clas
 }
 
 /** A short horizontal row of beads, used as a divider. */
-export function BeadRow({ count = 18, className = "" }: { count?: number; className?: string }) {
+export function BeadRow({ count = 18, small = false, className = "" }: { count?: number; small?: boolean; className?: string }) {
   return (
-    <div aria-hidden className={`flex items-center gap-1.5 ${className}`}>
+    <div aria-hidden className={`flex items-center ${small ? "gap-1" : "gap-1.5"} ${className}`}>
       {Array.from({ length: count }).map((_, i) => (
         <span
           key={i}
-          className="block h-2 w-2 rounded-full"
+          className={`block rounded-full ${small ? "h-1.5 w-1.5" : "h-2 w-2"}`}
           style={{ background: BEADS[i % BEADS.length], boxShadow: "inset 0 -1px 0 rgba(0,0,0,.25)" }}
         />
       ))}
@@ -69,3 +69,13 @@ export function ShukaStripe({ className = "" }: { className?: string }) {
 }
 
 export const BEAD_COLORS = BEADS;
+
+/** A section label with a few beads in front of it. */
+export function BeadLabel({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return (
+    <p className={`eyebrow flex items-center gap-3 ${className}`}>
+      <BeadRow count={4} small />
+      {children}
+    </p>
+  );
+}

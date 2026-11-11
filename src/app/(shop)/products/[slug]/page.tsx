@@ -8,6 +8,7 @@ import { ProductGridSkeleton } from "@/components/product-card";
 import { ProductRail } from "@/components/product-rail";
 import { AddToCart } from "@/components/add-to-cart";
 import { CONDITIONS, formatMoney, site, sortSizes } from "@/lib/site";
+import { BeadLabel, BeadRow } from "@/components/tribal";
 
 export async function generateMetadata({ params }: PageProps<"/products/[slug]">): Promise<Metadata> {
   const { slug } = await params;
@@ -20,7 +21,7 @@ async function Related({ productId }: { productId: ProductWithCard["_id"] }) {
   if (related.length === 0) return null;
   return (
     <section className="mt-24">
-      <p className="eyebrow">Complete the look</p>
+      <BeadLabel>Complete the look</BeadLabel>
       <h2 className="display mb-8 mt-3 text-4xl sm:text-5xl">You might also like</h2>
       <ProductRail products={related} />
     </section>
@@ -75,6 +76,7 @@ async function ProductDetail({ params }: { params: Promise<{ slug: string }> }) 
             </Link>
           </nav>
           <h1 className="display mt-5 text-4xl sm:text-5xl">{product.name}</h1>
+          <BeadRow count={6} small className="mt-3" />
           <div className="mt-4 flex items-baseline gap-3 text-lg">
             <span className={onSale ? "text-sale" : ""}>{formatMoney(product.priceCents)}</span>
             {onSale && !condition && (
