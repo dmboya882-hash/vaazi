@@ -48,3 +48,6 @@ next-env.d.ts
 # local Convex backend data and tool settings
 /.convex/
 /.claude/
+
+.vercel
+.env*
