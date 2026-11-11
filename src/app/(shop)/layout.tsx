@@ -6,6 +6,7 @@ import { Newsletter } from "@/components/newsletter";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { BeadBand } from "@/components/bead-band";
 import { BeadRow } from "@/components/tribal";
+import { BeadDivider } from "@/components/logo";
 import { formatMoney, site } from "@/lib/site";
 
 const FOOTER = [
@@ -93,6 +94,10 @@ export default function ShopLayout({ children }: { children: React.ReactNode }) 
             className="display mt-16 select-none pl-[0.25em] text-center text-[21vw] font-medium leading-[0.8] tracking-[0.25em] text-white/90 xl:text-[300px]"
           >
             {site.name}
+          </div>
+          <div className="mt-6 flex flex-col items-center gap-3 text-white/90">
+            <BeadDivider size={9} rule={90} />
+            <span className="pl-[0.4em] text-[11px] uppercase tracking-[0.5em] text-white/60">Mavazi · Nairobi</span>
           </div>
           <div className="mt-10 flex flex-col justify-between gap-4 border-t border-white/15 pt-6 text-[11px] uppercase tracking-[0.2em] text-white/50 sm:flex-row">
             <span>

@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { site } from "@/lib/site";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Logo } from "@/components/logo";
 import { logout } from "../login/actions";
 
 const NAV = [
@@ -15,8 +15,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <aside className="border-b border-line bg-card md:sticky md:top-0 md:flex md:h-screen md:w-60 md:flex-col md:border-b-0 md:border-r">
         <div className="flex items-center justify-between px-5 py-5 md:block md:py-7">
           <Link href="/admin" className="block">
-            <span className="display pl-[0.3em] text-2xl font-medium tracking-[0.3em]">{site.name}</span>
-            <span className="eyebrow mt-1 block">Admin</span>
+            <Logo size="sm" tagline={false} />
+            <span className="eyebrow mt-2 block">Admin</span>
           </Link>
           {/* Phones: toggle sits next to the name */}
           <ThemeToggle className="md:hidden" />

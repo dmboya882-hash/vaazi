@@ -39,7 +39,7 @@ export function CatalogShell({
 
   return (
     <>
-      <div className="sticky top-16 z-20 -mx-4 flex items-center justify-between gap-4 bg-background px-4 py-4 sm:-mx-8 sm:px-8">
+      <div className="sticky top-20 z-20 sm:top-24 -mx-4 flex items-center justify-between gap-4 bg-background px-4 py-4 sm:-mx-8 sm:px-8">
         <h1 className="text-lg font-medium sm:text-2xl">
           {title} <span className="text-muted">({count})</span>
         </h1>

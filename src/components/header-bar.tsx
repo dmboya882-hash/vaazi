@@ -7,6 +7,7 @@ import { useCart } from "@/components/cart-provider";
 import { BagIcon, ChevronIcon, CloseIcon, HeartIcon, MenuIcon, SearchIcon } from "@/components/icons";
 import { site } from "@/lib/site";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Logo } from "@/components/logo";
 
 type Cat = { name: string; slug: string };
 
@@ -42,97 +43,93 @@ export function HeaderBar({ categories }: { categories: Cat[] }) {
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-background/95 backdrop-blur">
-      <div className="relative mx-auto grid h-20 max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 sm:px-8">
-        {/* Left: menu (mobile) / main nav (desktop) */}
-        <div className="flex items-center">
+      <div className="relative mx-auto grid h-20 max-w-[1440px] grid-cols-[auto_1fr_auto] items-center gap-4 sm:h-24 px-4 sm:px-8">
+        {/* Left: menu button (phones) and the logo */}
+        <div className="flex items-center gap-2">
           <button className="-ml-2 p-2 lg:hidden" aria-label="Open menu" onClick={() => setMenuOpen(true)}>
             <MenuIcon />
           </button>
-          <nav className="hidden items-center gap-7 lg:flex" onMouseLeave={() => setMegaOpen(false)}>
-            <Link href="/shop?sort=newest" className={navLink}>
-              New In
-            </Link>
-            <button className={navLink} onMouseEnter={() => setMegaOpen(true)} onClick={() => setMegaOpen((o) => !o)} aria-expanded={megaOpen}>
-              Shop
-            </button>
-            <Link href="/shop?thrifted=1" className={navLink}>
-              Thrifted
-            </Link>
-            <Link href="/shop?sale=1" className={`${navLink} text-sale`}>
-              Sale
-            </Link>
-
-            {megaOpen && (
-              <div className="absolute inset-x-0 top-full border-b border-line bg-background">
-                <div className="mx-auto grid max-w-[1440px] grid-cols-4 gap-10 px-8 py-12">
-                  <div>
-                    <div className="eyebrow">Clothing</div>
-                    <ul className="mt-4 space-y-3 text-[15px]">
-                      {clothing.map((c) => (
-                        <li key={c.slug}>
-                          <Link href={`/shop?category=${c.slug}`} onClick={() => setMegaOpen(false)} className="hover:text-muted">
-                            {c.name}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <div className="eyebrow">Shoes &amp; more</div>
-                    <ul className="mt-4 space-y-3 text-[15px]">
-                      {other.map((c) => (
-                        <li key={c.slug}>
-                          <Link href={`/shop?category=${c.slug}`} onClick={() => setMegaOpen(false)} className="hover:text-muted">
-                            {c.name}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <div className="eyebrow">Shop by price</div>
-                    <ul className="mt-4 space-y-3 text-[15px]">
-                      {[
-                        ["under-1000", "Under Ksh 1,000"],
-                        ["under-2000", "Under Ksh 2,000"],
-                        ["under-5000", "Under Ksh 5,000"],
-                        ["under-10000", "Under Ksh 10,000"],
-                      ].map(([v, l]) => (
-                        <li key={v}>
-                          <Link href={`/shop?price=${v}`} onClick={() => setMegaOpen(false)} className="hover:text-muted">
-                            {l}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <Link
-                    href="/shop?thrifted=1"
-                    onClick={() => setMegaOpen(false)}
-                    className="flex flex-col justify-end bg-earth p-6 text-paper"
-                  >
-                    <span className="eyebrow text-paper/60">One of one</span>
-                    <span className="display mt-2 text-4xl italic">The thrift edit</span>
-                  </Link>
-                </div>
-              </div>
-            )}
-          </nav>
+          <Link href="/" aria-label={`${site.name} home`} className="shrink-0">
+            <span className="block sm:hidden">
+              <Logo size="sm" tagline={false} />
+            </span>
+            <span className="hidden sm:block">
+              <Logo size="md" />
+            </span>
+          </Link>
         </div>
 
-        {/* Centre: the wordmark */}
-        <Link href="/" aria-label={`${site.name} home`} className="text-center leading-none">
-          <span className="display block pl-[0.4em] text-[34px] font-medium tracking-[0.4em] sm:text-[44px]">{site.name}</span>
-          <span className="mt-1 hidden items-center justify-center gap-2 text-[9px] uppercase tracking-[0.45em] text-muted sm:flex">
-            Mavazi
-            <span aria-hidden className="flex gap-[3px]">
-              <i className="block h-[5px] w-[5px] rotate-45 bg-sale" />
-              <i className="block h-[5px] w-[5px] rotate-45 bg-accent" />
-              <i className="block h-[5px] w-[5px] rotate-45 bg-bead" />
-            </span>
-            Nairobi
-          </span>
-        </Link>
+        {/* Centre: main navigation (desktop) */}
+        <nav className="hidden items-center justify-center gap-8 lg:flex" onMouseLeave={() => setMegaOpen(false)}>
+          <Link href="/shop?sort=newest" className={navLink}>
+            New In
+          </Link>
+          <button className={navLink} onMouseEnter={() => setMegaOpen(true)} onClick={() => setMegaOpen((o) => !o)} aria-expanded={megaOpen}>
+            Shop
+          </button>
+          <Link href="/shop?thrifted=1" className={navLink}>
+            Thrifted
+          </Link>
+          <Link href="/shop?sale=1" className={`${navLink} text-sale`}>
+            Sale
+          </Link>
+
+          {megaOpen && (
+            <div className="absolute inset-x-0 top-full border-b border-line bg-background">
+              <div className="mx-auto grid max-w-[1440px] grid-cols-4 gap-10 px-8 py-12">
+                <div>
+                  <div className="eyebrow">Clothing</div>
+                  <ul className="mt-4 space-y-3 text-[15px]">
+                    {clothing.map((c) => (
+                      <li key={c.slug}>
+                        <Link href={`/shop?category=${c.slug}`} onClick={() => setMegaOpen(false)} className="hover:text-muted">
+                          {c.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <div className="eyebrow">Shoes &amp; more</div>
+                  <ul className="mt-4 space-y-3 text-[15px]">
+                    {other.map((c) => (
+                      <li key={c.slug}>
+                        <Link href={`/shop?category=${c.slug}`} onClick={() => setMegaOpen(false)} className="hover:text-muted">
+                          {c.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <div className="eyebrow">Shop by price</div>
+                  <ul className="mt-4 space-y-3 text-[15px]">
+                    {[
+                      ["under-1000", "Under Ksh 1,000"],
+                      ["under-2000", "Under Ksh 2,000"],
+                      ["under-5000", "Under Ksh 5,000"],
+                      ["under-10000", "Under Ksh 10,000"],
+                    ].map(([v, l]) => (
+                      <li key={v}>
+                        <Link href={`/shop?price=${v}`} onClick={() => setMegaOpen(false)} className="hover:text-muted">
+                          {l}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <Link
+                  href="/shop?thrifted=1"
+                  onClick={() => setMegaOpen(false)}
+                  className="flex flex-col justify-end bg-earth p-6 text-paper"
+                >
+                  <span className="eyebrow text-paper/60">One of one</span>
+                  <span className="display mt-2 text-4xl italic">The thrift edit</span>
+                </Link>
+              </div>
+            </div>
+          )}
+        </nav>
 
         {/* Right: actions */}
         <div className="flex items-center justify-end gap-1">
@@ -174,7 +171,7 @@ export function HeaderBar({ categories }: { categories: Cat[] }) {
           <div className="absolute inset-0 bg-black/40" onClick={() => setMenuOpen(false)} />
           <div className="absolute inset-y-0 left-0 flex w-[86%] max-w-sm flex-col overflow-y-auto bg-background p-6">
             <div className="flex items-center justify-between">
-              <span className="display pl-[0.4em] text-3xl font-medium tracking-[0.4em]">{site.name}</span>
+              <Logo size="sm" />
               <button aria-label="Close menu" onClick={() => setMenuOpen(false)}>
                 <CloseIcon />
               </button>
