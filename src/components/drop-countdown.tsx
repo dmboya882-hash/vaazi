@@ -35,7 +35,7 @@ export function DropCountdown({ dark = false }: { dark?: boolean }) {
   return (
     <div className="flex gap-2" aria-label="Time until next thrift drop">
       {["Days", "Hrs", "Min", "Sec"].map((label, i) => (
-        <div key={label} className={`min-w-14 px-2 py-2 text-center ${dark ? "bg-foreground text-background" : "bg-white/15"}`}>
+        <div key={label} className={`min-w-14 px-2 py-2 text-center ${dark ? "bg-foreground text-background" : "bg-black/35 backdrop-blur-sm"}`}>
           <div className="display text-3xl tabular-nums">{parts[i]}</div>
           <div className="text-[10px] uppercase tracking-wider opacity-70">{label}</div>
         </div>
