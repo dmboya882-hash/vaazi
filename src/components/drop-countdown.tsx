@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { site } from "@/lib/site";
+import { BEAD_COLORS } from "@/components/tribal";
 
 // Time until the next weekly thrift drop (day/hour in Nairobi time, UTC+3).
 function nextDrop(now: Date) {
@@ -35,7 +36,11 @@ export function DropCountdown({ dark = false }: { dark?: boolean }) {
   return (
     <div className="flex gap-2" aria-label="Time until next thrift drop">
       {["Days", "Hrs", "Min", "Sec"].map((label, i) => (
-        <div key={label} className={`min-w-14 px-2 py-2 text-center ${dark ? "bg-foreground text-background" : "bg-black/35 backdrop-blur-sm"}`}>
+        <div
+          key={label}
+          className={`min-w-14 border-t-[3px] px-2 py-2 text-center ${dark ? "bg-foreground text-background" : "bg-black/35 backdrop-blur-sm"}`}
+          style={{ borderTopColor: [BEAD_COLORS[0], BEAD_COLORS[3], BEAD_COLORS[2], BEAD_COLORS[1]][i] }}
+        >
           <div className="display text-3xl tabular-nums">{parts[i]}</div>
           <div className="text-[10px] uppercase tracking-wider opacity-70">{label}</div>
         </div>

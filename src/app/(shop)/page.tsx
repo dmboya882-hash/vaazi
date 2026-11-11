@@ -5,6 +5,7 @@ import { ProductCard, ProductGridSkeleton } from "@/components/product-card";
 import { EditorialPhoto } from "@/components/editorial-photo";
 import { DropCountdown } from "@/components/drop-countdown";
 import { BeadBand } from "@/components/bead-band";
+import { BeadCollar, BeadRow, ShukaStripe } from "@/components/tribal";
 import { media } from "@/lib/media";
 import { formatMoney, site } from "@/lib/site";
 
@@ -98,14 +99,18 @@ export default function HomePage() {
       {/* Weekly thrift drop: full-bleed photo with the text over it */}
       <section className="mt-10 bg-earth text-paper">
         <BeadBand />
+        <BeadBand className="opacity-60" />
         <div className="relative min-h-[560px] overflow-hidden md:min-h-[78vh]">
           {/* Wide landscape on desktop, tall portrait on phones */}
           <EditorialPhoto photo={media.thriftWide} className="absolute inset-0 hidden h-full w-full object-[center_85%] md:block" />
           <EditorialPhoto photo={media.thrift} className="absolute inset-0 h-full w-full object-[70%_25%] md:hidden" />
           {/* Fade from the left (and bottom on phones) so the text stays readable */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10 md:bg-gradient-to-r md:from-black/80 md:via-black/45 md:to-transparent" />
+          {/* Shuka check draped down the left edge */}
+          <ShukaStripe className="absolute inset-y-0 left-0 w-3 sm:w-5 lg:w-8" />
           <div className="relative mx-auto flex min-h-[560px] max-w-[1440px] flex-col justify-end px-4 py-14 sm:px-8 md:min-h-[78vh] md:justify-center">
-            <div className="max-w-md lg:max-w-xl">
+            <div className="max-w-md pl-4 sm:pl-6 lg:max-w-xl lg:pl-10">
+              <BeadCollar size={88} className="mb-6 drop-shadow-lg sm:size-[104px]" />
               <p className="eyebrow text-paper/70">Weekly thrift drop · One of one</p>
               <h2 className="display mt-3 text-4xl sm:text-6xl lg:text-7xl">
                 New finds land <em>{site.thriftDrop.label.toLowerCase()}</em>
@@ -113,6 +118,7 @@ export default function HomePage() {
               <p className="mt-4 text-[15px] leading-relaxed text-paper/80 lg:text-base">
                 Hand-picked, cleaned and graded. When it&apos;s gone, it&apos;s gone.
               </p>
+              <BeadRow className="mt-6" />
               <div className="mt-6">
                 <DropCountdown />
               </div>
@@ -122,6 +128,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+        <BeadBand className="opacity-60" />
         <BeadBand />
       </section>
 
