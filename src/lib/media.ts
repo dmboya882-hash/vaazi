@@ -20,6 +20,12 @@ export const media = {
     alt: "Man in a black coat standing in tall dry grass",
     credit: "Kofi Shelby / Pexels",
   } as Photo,
+  // Wide background for the thrift drop on desktop (subject on the right)
+  thriftWide: {
+    src: pexels(35826791, 2400),
+    alt: "Man sitting on a rock in a misty, barren landscape beside a bare tree",
+    credit: "The Chongaiman Ace / Pexels",
+  } as Photo,
   thrift: {
     src: unsplash("1579921562939-d9cc7a7dbd8e", 1400),
     alt: "Man in a long brown overcoat against dry brush",
